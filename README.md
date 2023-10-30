@@ -1,4 +1,5 @@
 # client-stream-vod
 Using C language for stream vod
 
-Testing - done
+Install SDL Development Libararies:
+sudo apt-get install libsdl2-dev
