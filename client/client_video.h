@@ -6,4 +6,8 @@
 #ifndef CLIENT_VIDEO_H
 #define CLIENT_VIDEO_H
 
+#include "utils.h"
+
+void video_play(const char *video_data, uint32_t video_length);
+
 #endif /* CLIENT_VIDEO_H */

@@ -1,13 +1,17 @@
-#include <stdio.h>
+#include "client_main.h"
 
 int main(int argc, char *argv[]) 
 {
-    /* Main entry point.
-     * 1. Sets up client
-     * 2. Initializes GUI
-     * 3. Handles user intercations
-    */
+    int client_socket;
 
-    printf("Client, hello world!\n");
-    return 0;
+    client_socket = client_socket_init();
+    if (client_socket < 0)
+        exit(CLIENT_EXIT_FAIL_INIT);
+
+    video_data_receive(client_socket);
+
+    // video_play(buffer, sizeof(buffer));
+
+    close(client_socket);
+    return CLIENT_EXIT_PASS;
 }
