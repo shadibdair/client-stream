@@ -8,38 +8,11 @@ static SDL_Rect volume_slider;
 static struct button buttons[TOTAL_BUTTON_NUM];
 
 /* Init the UI elemenets */
-void ui_elements_init()
+void ui_elements_init(SDL_Window *window)
 {
-    /* Todo: Change the magic numbers, fit to screen. */
-    int button_width = 100;
-    int button_height = 40;
-    int margin = 20;
-
     client_log(DBG, "Initializing UI elements.\n");
 
-    play_button.x = margin;
-    play_button.y = margin;
-    play_button.w = button_width;
-    play_button.h = button_height;
-
-    // Position and size of the Pause button
-    pause_button.x = margin * 2 + button_width;
-    pause_button.y = margin;
-    pause_button.w = button_width;
-    pause_button.h = button_height;
-
-    // Position and size of the Stop button
-    stop_button.x = margin * 3 + button_width * 2;
-    stop_button.y = margin;
-    stop_button.w = button_width;
-    stop_button.h = button_height;
-
-    // Position and size of the Volume slider (example)
-    volume_slider.x = margin;
-    volume_slider.y = margin * 2 + button_height;
-    volume_slider.w = button_width * 3 + margin * 2;
-    volume_slider.h = button_height;
-
+    button_positions_set(window);
     buttons_init();
 }
 
@@ -47,24 +20,58 @@ void buttons_init()
 {
     client_log(DBG, "Initializing buttons.\n");
     buttons[PLAY_BUTTON] = (struct button) {
-        .rect = play_button,
+        .rect = &play_button,
         .on_click_action = play_click_handle
     };
 
     buttons[PAUSE_BUTTON] = (struct button) {
-        .rect = pause_button,
+        .rect = &pause_button,
         .on_click_action = pause_click_handle
     };
 
-    buttons[STOP_BUTTON] = (struct button){
-        .rect = stop_button,
+    buttons[STOP_BUTTON] = (struct button) {
+        .rect = &stop_button,
         .on_click_action = stop_click_handle
     };
 }
 
+void button_positions_set(SDL_Window *window)
+{
+    int window_width, window_height;
+    int total_button_width, x_centered;
+
+    SDL_GetWindowSize(window, &window_width, &window_height);
+
+    total_button_width = 3 * BUTTON_WIDTH + 2 * MARGIN;
+    x_centered = (window_width - total_button_width) / 2;
+
+    /* Position and size the buttons */
+    play_button.x = x_centered;
+    play_button.y = window_height - BUTTON_HEIGHT - MARGIN;
+    play_button.w = BUTTON_WIDTH;
+    play_button.h = BUTTON_HEIGHT;
+
+    pause_button.x = x_centered + BUTTON_WIDTH + MARGIN;
+    pause_button.y = window_height - BUTTON_HEIGHT - MARGIN;
+    pause_button.w = BUTTON_WIDTH;
+    pause_button.h = BUTTON_HEIGHT;
+
+    stop_button.x = x_centered + 2 * (BUTTON_WIDTH + MARGIN);
+    stop_button.y = window_height - BUTTON_HEIGHT - MARGIN;
+    stop_button.w = BUTTON_WIDTH;
+    stop_button.h = BUTTON_HEIGHT;
+
+    /* Todo: Perhaps change position */
+    volume_slider.x = MARGIN;
+    volume_slider.y = play_button.y;
+    volume_slider.w = BUTTON_WIDTH * 2;
+    volume_slider.h = BUTTON_HEIGHT;
+}
+
 /* Renders UI elements 
  * Todo: Make it more efficient, avoid unnecessary rendering calls (i.e if UI elements haven't 
- * changed) */
+ * changed) 
+ * Add PLAY/PAUSE/STOP on the buttons. */
 void ui_elements_render(SDL_Renderer* renderer)
 {
     /* Clear the renderer */
@@ -95,7 +102,7 @@ void ui_elements_handle(SDL_Event e)
         SDL_Point mouse_point = { mouse_x, mouse_y };
 
         for (int i = 0; i < ARRAY_LENGTH(buttons); i++) {
-            if (SDL_PointInRect(&mouse_point, &buttons[i].rect)) {
+            if (SDL_PointInRect(&mouse_point, buttons[i].rect)) {
                 buttons[i].on_click_action();
                 break;
             }

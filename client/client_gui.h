@@ -11,6 +11,8 @@
 #include "client_ui.h"
 #include "utils.h"
 
+#define WIN_DELIM           1.5
+
 int sdl_init();
 void sdl_close();
 void sdl_event_loop_run();
