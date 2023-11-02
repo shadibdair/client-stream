@@ -20,7 +20,7 @@ enum button_types {
     PAUSE_BUTTON,
     STOP_BUTTON,
 
-    TOTAL_BUTTON_NUM = STOP_BUTTON
+    TOTAL_BUTTON_NUM
 };
 
 void ui_elements_init();

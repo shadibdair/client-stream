@@ -5,7 +5,7 @@ static SDL_Rect pause_button;
 static SDL_Rect stop_button;
 static SDL_Rect volume_slider;
 
-static struct button buttons[3];
+static struct button buttons[TOTAL_BUTTON_NUM];
 
 /* Init the UI elemenets */
 void ui_elements_init()
