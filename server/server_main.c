@@ -4,7 +4,7 @@ int main(int argc, char *argv[])
 {
     int server_socket, client_socket;
 
-    /* Todo: Add support to multiple clients. */
+    /* Todo: Add support for multiple clients at the same time. */
 
     server_socket = server_socket_init();
     if (server_socket < 0)
