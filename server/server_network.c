@@ -1,5 +1,5 @@
 #include "server_network.h"
-   
+
 int server_socket_init()
 {
     int server_socket, rc;

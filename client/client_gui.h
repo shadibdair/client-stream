@@ -6,4 +6,13 @@
 #ifndef CLIENT_GUI_H
 #define CLIENT_GUI_H
 
+#include <SDL2/SDL.h>
+
+#include "client_ui.h"
+#include "utils.h"
+
+int sdl_init();
+void sdl_close();
+void sdl_event_loop_run();
+
 #endif /* CLIENT_GUI_H */

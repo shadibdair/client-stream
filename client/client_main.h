@@ -6,6 +6,7 @@
 #include "client_network.h"
 #include "client_video.h"
 #include "utils.h"
+#include "client_gui.h"
 
 enum client_exit_value {
     CLIENT_EXIT_PASS        = 0,
