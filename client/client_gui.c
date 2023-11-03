@@ -21,7 +21,7 @@ int sdl_init()
 
     client_log(INF, "Creating SDL window and renderer..\n");
     g_window = SDL_CreateWindow("Video Player", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                dm.w / WIN_DELIM, dm.h / WIN_DELIM,
+                                dm.w / WINDOW_DELIM, dm.h / WINDOW_DELIM,
                                 SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (g_window == NULL) {
         client_log(ERR, "Window creation failed: %s\n", SDL_GetError());

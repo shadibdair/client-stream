@@ -11,7 +11,7 @@
 #include "client_ui.h"
 #include "utils.h"
 
-#define WIN_DELIM           1.5
+#define WINDOW_DELIM           1.5
 
 int sdl_init();
 void sdl_close();

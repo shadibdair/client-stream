@@ -6,6 +6,7 @@
 #define UTILS_H
 
 #include <inttypes.h>
+#include <stdbool.h>
 
 #define CLIENT_DEBUG 1
 

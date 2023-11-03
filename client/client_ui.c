@@ -5,6 +5,8 @@ static SDL_Rect pause_button;
 static SDL_Rect stop_button;
 static SDL_Rect volume_slider;
 
+static bool is_changed;
+
 static struct button buttons[TOTAL_BUTTON_NUM];
 
 /* Init the UI elemenets */
@@ -40,6 +42,8 @@ void button_positions_set(SDL_Window *window)
     int window_width, window_height;
     int total_button_width, x_centered;
 
+    is_changed = true;
+
     SDL_GetWindowSize(window, &window_width, &window_height);
 
     total_button_width = 3 * BUTTON_WIDTH + 2 * MARGIN;
@@ -74,6 +78,9 @@ void button_positions_set(SDL_Window *window)
  * Add PLAY/PAUSE/STOP on the buttons. */
 void ui_elements_render(SDL_Renderer* renderer)
 {
+    if (!is_changed)
+        return;
+
     /* Clear the renderer */
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
@@ -90,12 +97,14 @@ void ui_elements_render(SDL_Renderer* renderer)
 
     /* Present the renderer */
     SDL_RenderPresent(renderer);
+
+    is_changed = false;
 }
 
 /* Implements event handling for button clicks and other UI interactions */
-void ui_elements_handle(SDL_Event e)
+void ui_elements_handle(SDL_Event event)
 {
-    if (e.type == SDL_MOUSEBUTTONDOWN) {
+    if (event.type == SDL_MOUSEBUTTONDOWN) {
         int mouse_x, mouse_y;
         SDL_GetMouseState(&mouse_x, &mouse_y);
 

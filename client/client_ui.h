@@ -31,7 +31,7 @@ void ui_elements_init(SDL_Window *window);
 void buttons_init();
 void button_positions_set(SDL_Window *window);
 void ui_elements_render(SDL_Renderer* renderer);
-void ui_elements_handle(SDL_Event e);
+void ui_elements_handle(SDL_Event event);
 void play_click_handle();
 void pause_click_handle();
 void stop_click_handle();
