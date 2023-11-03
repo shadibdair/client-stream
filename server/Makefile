@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -std=c11
-LDFLAGS = -lm  # Add any necessary libraries here
+CFLAGS = -Wall -std=c11 $(shell pkg-config --cflags gstreamer-1.0)
+LDFLAGS = -lm $(shell pkg-config --libs gstreamer-1.0) # Add any necessary libraries here
 
 # Directory structure
 BUILD_DIR = build
