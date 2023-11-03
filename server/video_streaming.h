@@ -8,6 +8,9 @@
 
 #include <gstreamer-1.0/gst/gst.h>
 
-void video_streaming_init(int argc, char *argv[]);
+#include "utils.h"
+
+int video_streaming_init();
+void video_streaming_destroy();
 
 #endif /* VIDEO_STREAMING_H */

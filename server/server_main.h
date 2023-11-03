@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 #include "server_network.h"
+#include "video_streaming.h"
 #include "utils.h"
 
 enum server_exit_value {
