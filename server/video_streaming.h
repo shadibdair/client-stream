@@ -6,4 +6,8 @@
 #ifndef VIDEO_STREAMING_H
 #define VIDEO_STREAMING_H
 
+#include <gstreamer-1.0/gst/gst.h>
+
+void video_streaming_init(int argc, char *argv[]);
+
 #endif /* VIDEO_STREAMING_H */
