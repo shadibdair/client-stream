@@ -40,9 +40,26 @@ int client_accept(int server_socket)
     return client_socket;
 }
 
+// void send_video_data(int client_socket)
+// {
+//     char video_data[] = "Sample video data";
+//     server_log(INF, "Sending sample video data to client.\n");
+//     send(client_socket, video_data, strlen(video_data), 0);
+// }
+
 void send_video_data(int client_socket)
 {
-    char video_data[] = "Sample video data";
-    server_log(INF, "Sending sample video data to client.\n");
-    send(client_socket, video_data, strlen(video_data), 0);
+    // Initialize video streaming
+    if (video_streaming_init() != 0) {
+        server_log(ERR, "Failed to initialize video streaming.\n");
+        return;
+    }
+
+    /* Todo: We need to use RTP protocol to stream multimedia data. It provides time-stamping for
+     * synchronization. RTP typically handles this by providing sequence numbers and timestamps.
+     * On the client-side we need to receive, demultiplex, decode and render both video and audio
+     * streams in real time. We will use SDL & GStreamer for that.
+     * Take into account error handling. 
+     * */
 }
+
